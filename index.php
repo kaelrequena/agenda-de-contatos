@@ -1,18 +1,19 @@
 <?php
-    include_once("config/url.php");
+    include_once('./templates/header.php');
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <title>Agenda de contatos</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta charset="utf-8"/>
-        <link rel="stylesheet" href="<?= $BASE_URL ?>css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-    <body>
-        <h1>testando agenda</h1>
-        <i class="fas fa-eye"></i>
-    </body>
-</html>
+    <div class="container">
+        <?php if(isset($printMsg) && $printMsg != ''):?>
+            <p id="msg"><?= $printMsg ?></p>
+        <?php endif; ?>
+        <h1 id="main-title">Minha Agenda</h1>
+        <?php if(count($contacts) > 0 ):?>
+            <?php foreach($contacts as $contact => $pessoa):?>
+                <p><?php print_r($pessoa['name'])?></p>
+            <?php endforeach;?>
+        <?php else: ?>
+            <p id="empty-list-text">Ainda não há contatos na sua agenda, <a href="<?= $BASE_URL?>create.php">Clique aqui para adicionar</a></p>
+        <?php endif; ?>
+    </div>
+<?php
+    include_once('./templates/footer.php');
+?>
